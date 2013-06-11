@@ -46,7 +46,7 @@ register_plugin for_versions => [2];
 
 =head1 SYNOPSIS
 
-    use Dancer;
+    use Dancer2;
     use Dancer2::Plugin::BrowserDetect;
 
     get '/' => sub {
@@ -69,7 +69,7 @@ keyword within your L<Dancer> application.
 
 This module is developed on Github at:
 
-L<http://github.com/hobbestigrou/Dancer-Plugin-Browser>
+L<http://github.com/hobbestigrou/Dancer2-Plugin-BrowserDetect>
 
 Feel free to fork the repo and submit pull requests
 
@@ -81,7 +81,7 @@ Please report any bugs or feature requests in github.
 
 You can find documentation for this module with the perldoc command.
 
-    perldoc Dancer::Plugin::BrowserDetect
+    perldoc Dancer2::Plugin::BrowserDetect
 
 =head1 SEE ALSO
 

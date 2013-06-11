@@ -15,5 +15,6 @@ plan tests => 2;
 setting appdir => setting('appdir') . '/t';
 
 my $res = dancer_response GET => '/';
+
 ok ($res);
 like $res->{content}, qr/HTTP::BrowserDetect/;
