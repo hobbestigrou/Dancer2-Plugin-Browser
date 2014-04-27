@@ -69,7 +69,7 @@ keyword within your L<Dancer> application.
 
 This module is developed on Github at:
 
-L<http://github.com/hobbestigrou/Dancer2-Plugin-BrowserDetect>
+L<https://github.com/hobbestigrou/Dancer2-Plugin-Browser>
 
 Feel free to fork the repo and submit pull requests
 
