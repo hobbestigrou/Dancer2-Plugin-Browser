@@ -1,6 +1,9 @@
-Revision history for Dancer-Plugin-Browser
+Revision history for Dancer2-Plugin-BrowserDetect
 
 {{$NEXT}}
 
+1.141180  2014-04-28 10:59:07CEST+0200 Europe/Paris
+
+    Fix github url project by MartinMcGrath (#1).
     Initial version developed.
 
