@@ -3,7 +3,6 @@ package Dancer2::Plugin::BrowserDetect;
 use strict;
 use warnings;
 
-use Dancer2 ':syntax';
 use Dancer2::Plugin;
 
 use HTTP::BrowserDetect;
@@ -23,24 +22,33 @@ To have info of the browser
 
 =cut
 
-hook before_template => sub {
-    my $tokens = shift;
-
-    $tokens->{browser_detect} = _browser_detect();
+on_plugin_import {
+    my $dsl = shift;
+    $dsl->app->add_hook(
+        Dancer2::Core::Hook->new(
+            name => 'before_template',
+            code => sub {
+                my $tokens = shift;
+                $tokens->{browser_detect} = _browser_detect($dsl);
+            },
+        )
+    );
 };
 
 register browser_detect => sub {
-    _browser_detect();
+    my $dsl = shift;
+    _browser_detect($dsl);
 };
 
 sub _browser_detect {
-    my $useragent = request->env->{HTTP_USER_AGENT};
+    my $dsl = shift;
+    my $useragent = $dsl->app->request->env->{HTTP_USER_AGENT};
     my $browser   = HTTP::BrowserDetect->new($useragent);
 
     return $browser;
 }
 
-register_plugin for_versions => [2];
+register_plugin;
 
 =encoding utf8
 
