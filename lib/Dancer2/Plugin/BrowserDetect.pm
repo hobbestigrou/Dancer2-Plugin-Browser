@@ -3,9 +3,10 @@ package Dancer2::Plugin::BrowserDetect;
 use strict;
 use warnings;
 
-use Dancer2::Plugin;
+use Dancer2::Plugin 0.200000;
 
-use HTTP::BrowserDetect;
+use HTTP::BrowserDetect ();
+use Scalar::Util ();
 
 #ABSTRACT: Provides an easy to have info of the browser.
 
@@ -22,33 +23,30 @@ To have info of the browser
 
 =cut
 
-on_plugin_import {
-    my $dsl = shift;
-    $dsl->app->add_hook(
+sub BUILD {
+    my $plugin = shift;
+    # Create a weakened plugin that we can close over to avoid leaking.
+    Scalar::Util::weaken( my $weak_plugin = $plugin );
+    $plugin->app->add_hook(
         Dancer2::Core::Hook->new(
             name => 'before_template',
             code => sub {
                 my $tokens = shift;
-                $tokens->{browser_detect} = _browser_detect($dsl);
+                $tokens->{browser_detect} = $weak_plugin->browser_detect;
             },
         )
     );
-};
+}
 
-register browser_detect => sub {
-    my $dsl = shift;
-    _browser_detect($dsl);
-};
+plugin_keywords 'browser_detect';
 
-sub _browser_detect {
-    my $dsl = shift;
-    my $useragent = $dsl->app->request->env->{HTTP_USER_AGENT};
+sub browser_detect {
+    my $plugin = shift;
+    my $useragent = $plugin->app->request->env->{HTTP_USER_AGENT};
     my $browser   = HTTP::BrowserDetect->new($useragent);
 
     return $browser;
 }
-
-register_plugin;
 
 =encoding utf8
 
