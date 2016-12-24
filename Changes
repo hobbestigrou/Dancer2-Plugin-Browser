@@ -2,6 +2,9 @@ Revision history for Dancer2-Plugin-BrowserDetect
 
 {{$NEXT}}
 
+    Convert to pure Plugin2 (Dancer2::Plugin v0.200000). This allows plugin to
+    be consumed by other plugins. (Peter Mottram)
+
 1.162360  2016-08-23 23:48:18+02:00 Europe/Paris
 
     Remove dancer 1 dependency by nfg (#3).
