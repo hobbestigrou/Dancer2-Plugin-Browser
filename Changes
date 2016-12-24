@@ -2,6 +2,8 @@ Revision history for Dancer2-Plugin-BrowserDetect
 
 {{$NEXT}}
 
+1.163590  2016-12-24 19:20:51+01:00 Europe/Paris
+
     Convert to pure Plugin2 (Dancer2::Plugin v0.200000). This allows plugin to
     be consumed by other plugins. (Peter Mottram)
 
