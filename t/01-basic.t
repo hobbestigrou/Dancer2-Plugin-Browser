@@ -8,13 +8,15 @@ use lib 't/lib';
 use TestApp;
 
 use Dancer2;
-use Dancer2::Test apps => [ 'TestApp' ];;
+use Plack::Test;
+use HTTP::Request::Common;
 
 plan tests => 2;
 
 setting appdir => setting('appdir') . '/t';
 
-my $res = dancer_response GET => '/';
+my $app = Plack::Test->create( TestApp->to_app );
+my $res = $app->request( GET '/' );
 
 ok ($res);
-like $res->{content}, qr/HTTP::BrowserDetect/;
+like $res->content, qr/HTTP::BrowserDetect/;
